@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import PackImage from "../components/PackImage";
+import WishlistButton from "../components/WishlistButton";
 import ProductFacts from "../components/ProductFacts";
 import usePageTitle from "../hooks/usePageTitle";
 import { useCart } from "../context/CartContext";
@@ -117,9 +118,13 @@ export default function ProductDetailPage() {
               <Button type="button" onClick={handleAdd}>
                 {added ? "Added to cart" : "Add to cart"}
               </Button>
+              <WishlistButton productId={product.id} />
             </div>
           ) : (
-            <p className="muted">The pack artwork leaves the M.R.P. blank, so this item is not for sale yet.</p>
+            <>
+              <p className="muted">The pack artwork leaves the M.R.P. blank, so this item is not for sale yet.</p>
+              <WishlistButton productId={product.id} />
+            </>
           )}
         </div>
       </div>

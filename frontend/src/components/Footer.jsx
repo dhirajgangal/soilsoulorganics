@@ -1,33 +1,71 @@
 /** Shared bottom of every page. Company details come from the product pack. */
 import { Link } from "react-router-dom";
+import Icon from "./Icon";
 import Logo from "./Logo";
 import { company } from "../content/pack";
 import { developer } from "../content/site";
+
+const EXPLORE = [
+  { to: "/", label: "Home" },
+  { to: "/products", label: "Products" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
+];
 
 export default function Footer() {
   return (
     <footer>
       <div className="site-footer">
-        <div className="wrap footer-inner">
-          <Link to="/" aria-label="Soil Soul, home">
-            <Logo size="footer" alt="" />
-          </Link>
-          <p>Packed and marketed by {company.packedBy}</p>
-          <p className="muted">
-            <a href={company.whatsappHref}>WhatsApp {company.whatsapp}</a>
-            {" · "}
-            <a href={`mailto:${company.email}`}>{company.email}</a>
-          </p>
+        <div className="wrap footer-grid">
+          <div className="footer-brand">
+            <Link to="/" className="footer-logo" aria-label="Soil Soul, home">
+              <Logo size="footer" alt="" />
+            </Link>
+            <p>100% organic and natural soil enhancer.</p>
+          </div>
+
+          <nav className="footer-col" aria-label="Footer">
+            <p className="footer-label">Explore</p>
+            {EXPLORE.map((item) => (
+              <Link key={item.to} to={item.to}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="footer-col">
+            <p className="footer-label">Packed and marketed by</p>
+            <p className="footer-company">{company.packedBy}</p>
+            <p>GSTIN {company.gstin}</p>
+            <p>Product of India</p>
+          </div>
+
+          <div className="footer-col">
+            <p className="footer-label">Reach us</p>
+            <a href={company.whatsappHref}>
+              <Icon name="chat" />
+              {company.whatsapp}
+            </a>
+            <a href={`mailto:${company.email}`}>
+              <Icon name="mail" />
+              {company.email}
+            </a>
+            <a href={company.instagramHref}>
+              <Icon name="camera" />
+              {company.instagram}
+            </a>
+          </div>
         </div>
       </div>
+
       <div className="developer-bar">
         <p>
           Developed by {developer.name}
-          {" · "}
+          <span aria-hidden="true"> · </span>
           <a href={developer.phoneHref}>{developer.phone}</a>
-          {" · "}
+          <span aria-hidden="true"> · </span>
           <a href={`mailto:${developer.email}`}>{developer.email}</a>
-          {" · "}
+          <span aria-hidden="true"> · </span>
           <a href={developer.whatsappHref}>WhatsApp</a>
         </p>
       </div>

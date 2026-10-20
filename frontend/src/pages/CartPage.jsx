@@ -1,6 +1,7 @@
 /** Shopping cart. Quantities and removal stay in the browser until checkout. */
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
+import Icon from "../components/Icon";
 import usePageTitle from "../hooks/usePageTitle";
 import { useCart } from "../context/CartContext";
 import { formatPaise, formatPrice, priceToPaise } from "../services/money";
@@ -18,8 +19,12 @@ export default function CartPage() {
         </div>
 
         {items.length === 0 ? (
-          <div className="empty-state">
-            <p>Your cart is empty.</p>
+          <div className="empty-panel">
+            <span className="empty-icon">
+              <Icon name="bag" />
+            </span>
+            <h2>Your cart is empty</h2>
+            <p>Browse the product and it will wait here until checkout.</p>
             <Link className="btn btn-primary" to="/products">
               Browse products
             </Link>

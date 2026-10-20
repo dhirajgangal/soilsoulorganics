@@ -1,4 +1,5 @@
 /** Contact details printed on the Soil Improvement Powder pack. */
+import Icon from "../components/Icon";
 import usePageTitle from "../hooks/usePageTitle";
 import trowelImage from "../assets/photos/trowel.jpg";
 import { company } from "../content/pack";
@@ -8,16 +9,19 @@ const WAYS = [
     label: "WhatsApp",
     value: company.whatsapp,
     href: company.whatsappHref,
+    icon: "chat",
   },
   {
     label: "Email",
     value: company.email,
     href: `mailto:${company.email}`,
+    icon: "mail",
   },
   {
     label: "Instagram",
     value: company.instagram,
     href: company.instagramHref,
+    icon: "camera",
   },
 ];
 
@@ -39,8 +43,13 @@ export default function ContactPage() {
               {WAYS.map((way) => (
                 <li key={way.label}>
                   <a href={way.href}>
-                    <span>{way.label}</span>
-                    {way.value}
+                    <span className="icon-badge">
+                      <Icon name={way.icon} />
+                    </span>
+                    <span className="way-copy">
+                      <span>{way.label}</span>
+                      {way.value}
+                    </span>
                   </a>
                 </li>
               ))}

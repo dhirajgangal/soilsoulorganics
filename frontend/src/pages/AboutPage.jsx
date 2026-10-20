@@ -1,5 +1,7 @@
 /** About Soil Soul, using the details printed on the product pack. */
 import { Link } from "react-router-dom";
+import BenefitList from "../components/BenefitList";
+import Icon from "../components/Icon";
 import usePageTitle from "../hooks/usePageTitle";
 import packImage from "../assets/soil-improvement-powder.jpg";
 import glowImage from "../assets/photos/plant-glow.png";
@@ -14,18 +16,21 @@ const MARKS = [
     text: "Promotes healthy root development and crop growth.",
     image: dewImage,
     alt: "A green seedling growing from a small mound of soil.",
+    icon: "sprout",
   },
   {
     title: "Soil health",
     text: "Improves overall soil health and fertility.",
     image: moundImage,
     alt: "A young plant standing on a pile of dark soil.",
+    icon: "layers",
   },
   {
     title: "For all crops",
     text: "Suitable for all types of crops.",
     image: skyImage,
     alt: "A small green plant growing from a pile of soil.",
+    icon: "wheat",
   },
 ];
 
@@ -47,8 +52,10 @@ export default function AboutPage() {
             <div className="hero-actions about-actions">
               <Link className="btn btn-primary" to="/products">
                 View the product
+                <Icon name="arrow" />
               </Link>
               <Link className="btn btn-secondary" to="/contact">
+                <Icon name="chat" />
                 Contact us
               </Link>
             </div>
@@ -67,7 +74,12 @@ export default function AboutPage() {
             {MARKS.map((mark) => (
               <article className="mark-card" key={mark.title}>
                 <img src={mark.image} alt={mark.alt} />
-                <h2>{mark.title}</h2>
+                <h2>
+                  <span className="icon-badge">
+                    <Icon name={mark.icon} />
+                  </span>
+                  {mark.title}
+                </h2>
                 <p>{mark.text}</p>
               </article>
             ))}
@@ -94,11 +106,7 @@ export default function AboutPage() {
             <h2>Product benefits</h2>
             <p>Printed on the back of the pack.</p>
           </div>
-          <ul className="benefit-grid">
-            {soilImprovementPowder.benefits.map((benefit) => (
-              <li key={benefit}>{benefit}</li>
-            ))}
-          </ul>
+          <BenefitList />
         </div>
       </section>
 
@@ -113,20 +121,35 @@ export default function AboutPage() {
           <ul className="contact-cards">
             <li>
               <a href={company.whatsappHref}>
-                <span>WhatsApp</span>
-                {company.whatsapp}
+                <span className="icon-badge">
+                  <Icon name="chat" />
+                </span>
+                <span className="way-copy">
+                  <span>WhatsApp</span>
+                  {company.whatsapp}
+                </span>
               </a>
             </li>
             <li>
               <a href={`mailto:${company.email}`}>
-                <span>Email</span>
-                {company.email}
+                <span className="icon-badge">
+                  <Icon name="mail" />
+                </span>
+                <span className="way-copy">
+                  <span>Email</span>
+                  {company.email}
+                </span>
               </a>
             </li>
             <li>
               <a href={company.instagramHref}>
-                <span>Instagram</span>
-                {company.instagram}
+                <span className="icon-badge">
+                  <Icon name="camera" />
+                </span>
+                <span className="way-copy">
+                  <span>Instagram</span>
+                  {company.instagram}
+                </span>
               </a>
             </li>
           </ul>

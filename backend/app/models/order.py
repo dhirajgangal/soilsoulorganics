@@ -16,6 +16,8 @@ class Order(Base):
     __tablename__ = "orders"
 
     id = Column(Integer, primary_key=True, index=True)
+    # Set when the shopper is logged in. Guest orders leave this empty.
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True, index=True)
     customer_name = Column(String(120), nullable=False)
     email = Column(String(255), nullable=False)
     phone = Column(String(20), nullable=False)

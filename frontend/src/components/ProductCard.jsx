@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import PackImage from "./PackImage";
+import WishlistButton from "./WishlistButton";
 import { formatPrice, hasSellingPrice } from "../services/money";
 
 export default function ProductCard({ product, onAdd }) {
@@ -33,6 +34,7 @@ export default function ProductCard({ product, onAdd }) {
           <Link className="btn btn-secondary" to={`/products/${product.id}`}>
             View details
           </Link>
+          <WishlistButton productId={product.id} />
           {priced ? (
             <Button type="button" onClick={() => { onAdd(product); setAdded(true); }}>
               {added ? "Added" : "Add to cart"}

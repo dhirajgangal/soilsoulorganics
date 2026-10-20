@@ -1,7 +1,9 @@
 /** Home page: slider, pack highlights, and the current product. */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BenefitList from "../components/BenefitList";
 import HomeSlider from "../components/HomeSlider";
+import Icon from "../components/Icon";
 import usePageTitle from "../hooks/usePageTitle";
 import packImage from "../assets/soil-improvement-powder.jpg";
 import handsImage from "../assets/photos/hands.jpg";
@@ -19,24 +21,28 @@ const HIGHLIGHTS = [
     text: "Promotes healthy root development and crop growth.",
     image: handsImage,
     alt: "Hands cupping soil around a small plant.",
+    icon: "roots",
   },
   {
     title: "Healthy growth",
     text: "Helps maintain long-term soil productivity.",
     image: sunImage,
     alt: "A seedling standing in sunlit soil.",
+    icon: "sprout",
   },
   {
     title: "100% organic",
     text: "100% organic and natural formulation.",
     image: soilImage,
     alt: "A young plant growing out of rich soil.",
+    icon: "leaf",
   },
   {
     title: "Soil health",
     text: "Improves overall soil health and fertility.",
     image: fieldImage,
     alt: "A small plant on a ridge of dark soil.",
+    icon: "layers",
   },
 ];
 
@@ -78,7 +84,12 @@ export default function HomePage() {
           <div className="highlight-grid">
             {HIGHLIGHTS.map((item) => (
               <article className="highlight-card" key={item.title}>
-                <img src={item.image} alt={item.alt} />
+                <div className="highlight-photo">
+                  <img src={item.image} alt={item.alt} />
+                  <span className="icon-badge">
+                    <Icon name={item.icon} />
+                  </span>
+                </div>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </article>
@@ -100,6 +111,7 @@ export default function HomePage() {
             <p>{soilImprovementPowder.summary}</p>
             <Link className="btn btn-primary" to={productPath}>
               View details
+              <Icon name="arrow" />
             </Link>
           </div>
         </div>
@@ -111,11 +123,7 @@ export default function HomePage() {
             <h2>Product benefits</h2>
             <p>Printed on the back of the pack.</p>
           </div>
-          <ul className="benefit-grid">
-            {soilImprovementPowder.benefits.map((benefit) => (
-              <li key={benefit}>{benefit}</li>
-            ))}
-          </ul>
+          <BenefitList />
         </div>
       </section>
 
@@ -136,14 +144,21 @@ export default function HomePage() {
       <section className="section home-band-section">
         <div className="wrap crop-band">
           <div>
-            <p className="eyebrow">Recommended crops</p>
+            <p className="eyebrow eyebrow-icon">
+              <Icon name="wheat" />
+              Recommended crops
+            </p>
             <h2>For all types of crops</h2>
             <p>{soilImprovementPowder.crops}</p>
           </div>
           <div>
-            <p className="eyebrow">Application</p>
+            <p className="eyebrow eyebrow-icon">
+              <Icon name="sprout" />
+              Application
+            </p>
             <p>{soilImprovementPowder.application}</p>
             <a className="btn btn-secondary" href={company.whatsappHref}>
+              <Icon name="chat" />
               WhatsApp {company.whatsapp}
             </a>
           </div>

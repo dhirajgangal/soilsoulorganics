@@ -2,12 +2,13 @@
  * Checkout collects delivery details and sends the cart to POST /api/orders.
  * Only product ids and quantities are sent. The API calculates the price.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import usePageTitle from "../hooks/usePageTitle";
+import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
-import { createOrder } from "../services/api";
+import { createOrder, getAddresses } from "../services/api";
 import { formatPaise, priceToPaise } from "../services/money";
 import { saveOrder } from "../services/orderStorage";
 import { validateCheckout } from "../services/validation";
@@ -39,13 +40,71 @@ function Field({ label, name, error, children }) {
 
 export default function CheckoutPage() {
   const { items, subtotalPaise, clearCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState(EMPTY_FORM);
+  const [addresses, setAddresses] = useState([]);
   const [errors, setErrors] = useState({});
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   usePageTitle("Checkout · Soil Soul");
+
+  useEffect(() => {
+    if (!user) {
+      return undefined;
+    }
+    setForm((current) => ({
+      ...current,
+      customer_name: current.customer_name || user.name,
+      email: current.email || user.email,
+      phone: current.phone || user.phone,
+    }));
+    let ignore = false;
+    getAddresses()
+      .then((rows) => {
+        if (ignore) {
+          return;
+        }
+        setAddresses(rows);
+        const chosen = rows.find((row) => row.is_default) || rows[0];
+        if (chosen) {
+          setForm((current) => ({
+            ...current,
+            customer_name: chosen.full_name,
+            phone: chosen.phone,
+            address_line: chosen.address_line,
+            city: chosen.city,
+            state: chosen.state,
+            postal_code: chosen.postal_code,
+          }));
+        }
+      })
+      .catch(() => {
+        if (!ignore) {
+          setAddresses([]);
+        }
+      });
+    return () => {
+      ignore = true;
+    };
+  }, [user]);
+
+  function applyAddress(addressId) {
+    const chosen = addresses.find((row) => String(row.id) === addressId);
+    if (!chosen) {
+      return;
+    }
+    setForm((current) => ({
+      ...current,
+      customer_name: chosen.full_name,
+      phone: chosen.phone,
+      address_line: chosen.address_line,
+      city: chosen.city,
+      state: chosen.state,
+      postal_code: chosen.postal_code,
+    }));
+  }
 
   function updateField(event) {
     const { name, value } = event.target;
@@ -112,6 +171,29 @@ export default function CheckoutPage() {
         <div className="checkout-layout">
           <form className="checkout-form" onSubmit={handleSubmit} noValidate>
             {formError ? <p className="banner banner-error">{formError}</p> : null}
+            {user ? null : (
+              <p className="muted">
+                <Link to="/login" state={{ from: "/checkout" }}>Log in</Link> to use a saved address.
+              </p>
+            )}
+            {addresses.length > 0 ? (
+              <label className="field" htmlFor="saved_address">
+                <span>Saved address</span>
+                <select
+                  id="saved_address"
+                  defaultValue=""
+                  onChange={(event) => applyAddress(event.target.value)}
+                >
+                  <option value="">Choose an address</option>
+                  {addresses.map((address) => (
+                    <option key={address.id} value={address.id}>
+                      {address.full_name}, {address.city}
+                      {address.is_default ? " (default)" : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
             <Field label="Full name" name="customer_name" error={errors.customer_name}>
               <input
                 id="customer_name"

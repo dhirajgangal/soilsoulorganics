@@ -100,7 +100,16 @@ Open `http://localhost:5173`.
 | GET | `/api/health` | Check that the API process is running |
 | GET | `/api/products` | List products |
 | GET | `/api/products/{product_id}` | One product |
-| POST | `/api/orders` | Save an order as pending payment |
+| POST | `/api/orders` | Save an order as pending payment. A logged-in customer is attached to the order. |
+| POST | `/api/auth/register` | Create an account and return a login token |
+| POST | `/api/auth/login` | Check email and password, return a login token |
+| POST | `/api/auth/logout` | Forget the current login token |
+| POST | `/api/auth/forgot-password` | Email a reset link when SMTP is configured |
+| POST | `/api/auth/reset-password` | Set a new password from that link |
+| GET | `/api/account/me` | The logged-in profile |
+| GET | `/api/account/orders` | Orders placed while logged in |
+| GET, POST, DELETE | `/api/account/addresses` | Saved delivery addresses |
+| GET, POST, DELETE | `/api/account/wishlist` | Saved products |
 
 ## Database changes
 

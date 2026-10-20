@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from app.models.order import Order, OrderItem
 from app.models.product import Product
+from app.models.user import User
 from app.schemas.order import OrderCreate
 
 
@@ -20,7 +21,7 @@ class OrderError(Exception):
         self.message = message
 
 
-def create_order(db: Session, data: OrderCreate) -> Order:
+def create_order(db: Session, data: OrderCreate, user: User | None = None) -> Order:
     quantities: dict[int, int] = {}
     for item in data.items:
         quantities[item.product_id] = quantities.get(item.product_id, 0) + item.quantity
@@ -36,6 +37,7 @@ def create_order(db: Session, data: OrderCreate) -> Order:
         raise OrderError("One of the products in your cart is no longer available.")
 
     order = Order(
+        user_id=user.id if user is not None else None,
         customer_name=data.customer_name,
         email=data.email,
         phone=data.phone,

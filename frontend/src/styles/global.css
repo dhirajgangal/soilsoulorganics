@@ -14,8 +14,8 @@
   --line: #e3dbd0;
   --danger: #7a3e34;
   --shadow: 0 10px 30px rgba(36, 48, 40, 0.06);
-  --font-body: "Avenir Next", "Segoe UI", sans-serif;
-  --font-display: Georgia, "Iowan Old Style", Palatino, serif;
+  --font-body: "Nunito Sans", "Segoe UI", sans-serif;
+  --font-display: Fraunces, Georgia, serif;
 }
 
 *,
@@ -41,7 +41,7 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 560;
   line-height: 1.2;
   margin: 0 0 0.4em;
 }

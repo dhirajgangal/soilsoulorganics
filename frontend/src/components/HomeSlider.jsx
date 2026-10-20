@@ -5,6 +5,7 @@
  */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Icon from "./Icon";
 import handsImage from "../assets/photos/hands.jpg";
 import sunImage from "../assets/photos/seedling-sun.jpg";
 import fieldImage from "../assets/photos/seedling-field.jpg";
@@ -88,8 +89,10 @@ export default function HomeSlider() {
                 <div className="hero-actions">
                   <Link className="btn btn-primary" to="/products">
                     View product
+                    <Icon name="arrow" />
                   </Link>
                   <Link className="btn btn-secondary" to="/about">
+                    <Icon name="leaf" />
                     About the pack
                   </Link>
                 </div>
@@ -107,7 +110,7 @@ export default function HomeSlider() {
 
         <div className="slider-controls">
           <button type="button" onClick={() => showSlide(index - 1)} aria-label="Previous slide">
-            ‹
+            <Icon name="chevronLeft" />
           </button>
           <div className="slider-dots" role="tablist" aria-label="Slides">
             {SLIDES.map((slide, slideIndex) => (
@@ -123,7 +126,7 @@ export default function HomeSlider() {
             ))}
           </div>
           <button type="button" onClick={() => showSlide(index + 1)} aria-label="Next slide">
-            ›
+            <Icon name="chevronRight" />
           </button>
         </div>
       </div>

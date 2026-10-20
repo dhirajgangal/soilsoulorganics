@@ -67,6 +67,22 @@
   background: var(--green-deep);
 }
 
+.btn .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-badge {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 14px;
+  background: #e7efe4;
+  color: var(--green-deep);
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--green-deep);
@@ -202,7 +218,8 @@
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--line);

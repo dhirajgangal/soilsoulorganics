@@ -16,6 +16,17 @@ class Settings(BaseSettings):
     # Comma-separated list of frontend addresses.
     cors_origins: str = "http://localhost:5173"
 
+    # Used in the password-reset email. No slash at the end.
+    frontend_url: str = "http://localhost:5173"
+
+    # Leave SMTP blank until you have a mail account. Reset links are
+    # written to the API log instead of being emailed.
+    smtp_host: str = ""
+    smtp_port: int = 587
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_from: str = ""
+
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     @property

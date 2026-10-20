@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import OperationalError
 
-from app.api.routes import orders, products
+from app.api.routes import account, auth, orders, products
 from app.core.config import get_settings
 
 settings = get_settings()
@@ -32,6 +32,8 @@ app.add_middleware(
 
 app.include_router(products.router, prefix="/api")
 app.include_router(orders.router, prefix="/api")
+app.include_router(auth.router, prefix="/api")
+app.include_router(account.router, prefix="/api")
 
 
 @app.get("/api/health")
