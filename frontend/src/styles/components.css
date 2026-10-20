@@ -1,0 +1,256 @@
+/* Reusable controls: logo frame, buttons, cards, and form fields. */
+
+/* The logo file is a square with empty space around the mark.
+   Each frame shows only the mark. Change the frame size, then scale
+   the image by the same amount, to resize the logo. */
+.logo-frame {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.logo-frame img {
+  display: block;
+  max-width: none;
+}
+
+.logo-header {
+  width: 148px;
+  height: 106px;
+}
+
+.logo-header img {
+  width: 335px;
+  height: 335px;
+  margin: -113px 0 0 -93px;
+}
+
+.logo-hero {
+  width: 320px;
+  height: 228px;
+}
+
+.logo-hero img {
+  width: 724px;
+  height: 724px;
+  margin: -245px 0 0 -201px;
+}
+
+.logo-footer {
+  width: 112px;
+  height: 80px;
+}
+
+.logo-footer img {
+  width: 253px;
+  height: 253px;
+  margin: -86px 0 0 -71px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--green);
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--green-deep);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--green-deep);
+  border-color: #c9d3c6;
+}
+
+.btn-secondary:hover {
+  background: var(--sand);
+}
+
+.btn-quiet {
+  min-height: 36px;
+  padding: 4px 0;
+  background: transparent;
+  color: var(--danger);
+  border-radius: 0;
+}
+
+.btn-quiet:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.card-art,
+.detail-art {
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  background: var(--sand);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.card-art {
+  text-decoration: none;
+}
+
+.pack-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--white);
+}
+
+.card-art:has(.pack-photo),
+.detail-art:has(.pack-photo) {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  padding: 20px;
+}
+
+.card-body h3 {
+  margin: 0;
+}
+
+.card-body h3 a,
+.cart-item h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-body h3 a:hover,
+.cart-item h2 a:hover {
+  text-decoration: underline;
+}
+
+.card-copy {
+  color: var(--muted);
+  flex: 1;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.price {
+  margin: 0;
+  color: var(--terracotta);
+  font-weight: 700;
+}
+
+.price-large {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 640px));
+  gap: 24px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field-error {
+  color: var(--danger);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.banner {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--sand);
+  margin-bottom: 16px;
+}
+
+.banner-error {
+  background: #f8eeea;
+  color: var(--danger);
+}
+
+.status-text {
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .logo-hero {
+    width: 240px;
+    height: 171px;
+  }
+
+  .logo-hero img {
+    width: 543px;
+    height: 543px;
+    margin: -184px 0 0 -151px;
+  }
+
+  .card-actions .btn {
+    flex: 1;
+  }
+}

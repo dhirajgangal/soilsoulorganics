@@ -1,0 +1,108 @@
+/* Shared colors, type, and element defaults.
+   Green and terracotta come from the Soil Soul logo. */
+
+:root {
+  --green: #406040;
+  --green-deep: #2c452e;
+  --terracotta: #a06030;
+  --cream: #f4f1eb;
+  --paper: #fbf9f6;
+  --white: #ffffff;
+  --sand: #efe6d9;
+  --ink: #243028;
+  --muted: #5c6a60;
+  --line: #e3dbd0;
+  --danger: #7a3e34;
+  --shadow: 0 10px 30px rgba(36, 48, 40, 0.06);
+  --font-body: "Avenir Next", "Segoe UI", sans-serif;
+  --font-display: Georgia, "Iowan Old Style", Palatino, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.4em;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--green-deep);
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 8px 12px;
+  z-index: 5;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

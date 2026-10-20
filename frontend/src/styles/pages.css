@@ -1,0 +1,398 @@
+/* Layouts that belong to one page: product detail, cart, checkout, receipt. */
+
+.eyebrow {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.eyebrow a {
+  color: var(--green);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.detail > div:last-child {
+  max-width: 42rem;
+}
+
+.detail-art {
+  min-height: 0;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.product-facts-wrap,
+.about {
+  margin-top: 8px;
+}
+
+.product-facts {
+  max-width: 42rem;
+  margin-top: 36px;
+}
+
+.product-facts ul,
+.contact-list {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.product-facts li,
+.contact-list li {
+  margin-bottom: 0.35rem;
+}
+
+.about-company {
+  max-width: 42rem;
+  margin-top: 12px;
+}
+
+.about .pack-photo {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.detail-buy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.qty-field {
+  width: 120px;
+  margin: 0;
+}
+
+.cart-layout,
+.checkout-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-item h2 {
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+}
+
+.cart-line-end {
+  text-align: right;
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+}
+
+.qty button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.qty button:disabled {
+  color: #b3b8b4;
+  cursor: not-allowed;
+}
+
+.qty span {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.summary,
+.receipt {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.summary h2,
+.receipt h2 {
+  font-size: 1.4rem;
+}
+
+.summary-items {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.summary-items li,
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary-row strong {
+  color: var(--terracotta);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.empty-state {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.receipt {
+  margin: 24px 0;
+}
+
+.receipt-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--sand);
+  color: var(--terracotta);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.receipt-address {
+  margin-top: 18px;
+}
+
+.receipt-address p {
+  margin: 0;
+}
+
+.page-hero {
+  padding: 36px 0 8px;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(64, 96, 64, 0.1), transparent 28%),
+    var(--cream);
+}
+
+.page-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+  gap: 36px;
+  align-items: center;
+}
+
+.page-hero-grid > div > p {
+  max-width: 36rem;
+  color: var(--muted);
+}
+
+.about-actions {
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+.page-hero-photo {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 28px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.about-marks-section {
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.mark-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mark-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.mark-card img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+
+.mark-card h2,
+.mark-card p {
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+.mark-card h2 {
+  margin-top: 14px;
+  font-size: 1.3rem;
+}
+
+.mark-card p {
+  color: var(--muted);
+}
+
+.about-pack-section {
+  padding-top: 20px;
+  padding-bottom: 12px;
+}
+
+.about-pack {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: 28px;
+  align-items: center;
+  padding: 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.about-pack img {
+  width: 100%;
+  border-radius: 18px;
+}
+
+.about-company-section {
+  padding-top: 8px;
+}
+
+.company-band {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  gap: 28px;
+  align-items: center;
+  padding: 32px;
+  border-radius: 28px;
+  background: var(--green-deep);
+  color: #f6f3ee;
+}
+
+.company-band h2,
+.company-band p {
+  color: #f6f3ee;
+}
+
+.company-band .eyebrow {
+  color: #d7c4a4;
+}
+
+.contact-cards {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.contact-cards a {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--white);
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.contact-cards a:hover {
+  border-color: var(--green);
+}
+
+.contact-cards span {
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.company-note {
+  padding: 28px 32px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 800px) {
+  .detail,
+  .cart-layout,
+  .checkout-layout,
+  .field-row,
+  .page-hero-grid,
+  .mark-grid,
+  .about-pack,
+  .company-band {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero-photo,
+  .mark-card img {
+    height: 240px;
+  }
+
+  .cart-item {
+    grid-template-columns: 1fr auto;
+  }
+
+  .cart-line-end {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+}

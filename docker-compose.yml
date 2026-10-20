@@ -1,0 +1,23 @@
+# Local PostgreSQL for development.
+# The username and password match backend/.env.example.
+# They are only for this local database, not for a public server.
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: soilsoul
+      POSTGRES_PASSWORD: soilsoul
+      POSTGRES_DB: soilsoul
+    ports:
+      - "5432:5432"
+    volumes:
+      - soilsoul_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U soilsoul -d soilsoul"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  soilsoul_pg:
