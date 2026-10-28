@@ -211,6 +211,7 @@
 }
 
 .developer-bar {
+  border-top: 2px solid var(--gold);
   background: var(--green-deep);
   color: var(--on-dark-muted);
   text-align: center;
@@ -233,6 +234,7 @@
 .developer-bar .icon {
   width: 15px;
   height: 15px;
+  color: var(--gold-light);
 }
 
 /* Sections */
@@ -252,6 +254,15 @@
   margin-bottom: 36px;
 }
 
+.section-heading::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-bottom: 18px;
+  background: var(--gold);
+}
+
 .section-heading p,
 .muted {
   color: var(--muted);
@@ -266,8 +277,8 @@
   height: 52px;
   border: 1px solid var(--green-deep);
   border-radius: 50%;
-  background: var(--green-deep);
-  color: var(--on-dark);
+  background: var(--gold);
+  color: var(--ink);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -276,7 +287,7 @@
 }
 
 .scroll-top:hover {
-  background: var(--green);
+  background: var(--gold-light);
 }
 
 @media (max-width: 800px) {

@@ -287,6 +287,15 @@
   line-height: 1.2;
 }
 
+.auth-visual p::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 14px;
+  background: var(--gold-light);
+}
+
 .auth-panel {
   width: auto;
   margin: 0;
@@ -393,6 +402,10 @@
   color: var(--on-dark);
 }
 
+.account-nav a.active .icon {
+  color: var(--gold-light);
+}
+
 .account-hero {
   position: relative;
   display: flex;
@@ -412,9 +425,12 @@
   color: var(--on-dark);
 }
 
-.account-hero .eyebrow,
 .account-hero .muted {
   color: var(--on-dark-muted);
+}
+
+.account-hero .eyebrow {
+  color: var(--gold-light);
 }
 
 .account-hero-photo {
@@ -473,7 +489,7 @@
   display: grid;
   place-items: center;
   flex: none;
-  border: 1px solid var(--line);
+  border: 1px solid var(--gold);
   border-radius: 50%;
   background: var(--sage-light);
   color: var(--green-deep);
@@ -700,6 +716,7 @@
   gap: 40px;
   align-items: center;
   padding: 48px;
+  border-top: 3px solid var(--gold);
   border-radius: var(--radius-lg);
   background: var(--green-deep);
   color: var(--on-dark);
@@ -728,7 +745,7 @@
 }
 
 .company-band .icon-badge {
-  border-color: var(--green);
+  border-color: var(--gold);
 }
 
 .company-band .way-copy span {

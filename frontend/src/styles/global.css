@@ -15,6 +15,11 @@
   --terracotta: #a06030;
   --terracotta-text: #7a4520;
 
+  /* Muted gold accent. On sage it is too light for text, so use it only
+     for rules and outlines there. Use --gold-light for text on deep green. */
+  --gold: #b0945a;
+  --gold-light: #d2b87c;
+
   /* Text */
   --ink: #243028;
   --muted: #48544b;
@@ -25,7 +30,7 @@
   /* Text and lines on deep green */
   --on-dark: #f3f1e8;
   --on-dark-muted: #cfd8c6;
-  --on-dark-accent: #d7c4a4;
+  --on-dark-accent: var(--gold-light);
   --footer-strip: #1c2e1e;
   --photo-shade: rgba(20, 28, 22, 0.5);
   --header-glass: rgba(211, 216, 196, 0.92);

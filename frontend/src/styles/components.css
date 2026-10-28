@@ -109,7 +109,7 @@
   width: 42px;
   height: 42px;
   flex: none;
-  border: 1px solid var(--line);
+  border: 1px solid var(--gold);
   border-radius: 50%;
   background: var(--sage-light);
   color: var(--green-deep);
