@@ -55,7 +55,7 @@
 .nav a,
 .nav-text-link {
   padding: 6px 0;
-  border-bottom: 1px solid transparent;
+  border-bottom: 2px solid transparent;
   color: var(--ink);
   font-size: 0.78rem;
   font-weight: 600;
@@ -68,7 +68,7 @@
 .nav-text-link:hover,
 .nav a.active,
 .nav-text-link.active {
-  border-bottom-color: var(--ink);
+  border-bottom-color: var(--gold);
 }
 
 .nav-mobile-only,
@@ -345,7 +345,7 @@
 
   .nav a:hover,
   .nav a.active {
-    border-bottom-color: var(--line);
+    border-bottom-color: var(--gold);
     color: var(--green);
   }
 
