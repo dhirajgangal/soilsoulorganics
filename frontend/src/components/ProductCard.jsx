@@ -34,12 +34,12 @@ export default function ProductCard({ product, onAdd }) {
           <Link className="btn btn-secondary" to={`/products/${product.id}`}>
             View details
           </Link>
-          <WishlistButton productId={product.id} />
           {priced ? (
             <Button type="button" onClick={() => { onAdd(product); setAdded(true); }}>
               {added ? "Added" : "Add to cart"}
             </Button>
           ) : null}
+          <WishlistButton productId={product.id} />
         </div>
       </div>
     </article>

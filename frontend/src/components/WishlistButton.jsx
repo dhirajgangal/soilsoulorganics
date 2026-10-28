@@ -1,6 +1,7 @@
 /** Saves or removes a product from the signed-in customer's wishlist. */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Icon from "./Icon";
 import { useAuth } from "../context/AuthContext";
 import { addWishlist, getWishlist, removeWishlist } from "../services/api";
 
@@ -53,9 +54,19 @@ export default function WishlistButton({ productId }) {
     }
   }
 
+  const label = saved ? "Remove from wishlist" : "Save to wishlist";
+
   return (
-    <button type="button" className="wish-button" onClick={toggle} disabled={busy}>
-      {saved ? "Saved" : "Save"}
+    <button
+      type="button"
+      className={`wish-button${saved ? " is-saved" : ""}`}
+      onClick={toggle}
+      disabled={busy}
+      aria-label={label}
+      aria-pressed={saved}
+      title={label}
+    >
+      <Icon name={saved ? "heartFilled" : "heart"} />
     </button>
   );
 }

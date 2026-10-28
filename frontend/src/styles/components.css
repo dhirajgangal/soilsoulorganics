@@ -307,4 +307,9 @@
   .card-actions .btn {
     flex: 1;
   }
+
+  /* Two labelled buttons and the heart do not fit on one line here. */
+  .card-actions .btn-secondary {
+    flex-basis: 100%;
+  }
 }

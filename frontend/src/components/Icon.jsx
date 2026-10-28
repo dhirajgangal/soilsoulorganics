@@ -4,6 +4,7 @@
  * Ant Design has no plant icons, so the pack marks use the closest match.
  */
 import {
+  AiFillHeart,
   AiOutlineAppstore,
   AiOutlineApartment,
   AiOutlineArrowRight,
@@ -34,6 +35,7 @@ const ICONS = {
   bag: AiOutlineShopping,
   box: AiOutlineInbox,
   heart: AiOutlineHeart,
+  heartFilled: AiFillHeart,
   pin: AiOutlineEnvironment,
   home: AiOutlineHome,
   logout: AiOutlineLogout,
