@@ -8,7 +8,7 @@ import glowImage from "../assets/photos/plant-glow.png";
 import moundImage from "../assets/photos/plant-mound.jpg";
 import dewImage from "../assets/photos/plant-dew.png";
 import skyImage from "../assets/photos/plant-sky.png";
-import { company, soilImprovementPowder } from "../content/pack";
+import { company, soilEnhancerGranules, soilImprovementPowder } from "../content/pack";
 
 const MARKS = [
   {
@@ -45,13 +45,13 @@ export default function AboutPage() {
             <p className="eyebrow">Let Soil Soul Nourish Nature</p>
             <h1>About Soil Soul</h1>
             <p>
-              Soil Soul makes {soilImprovementPowder.name}, a{" "}
-              {soilImprovementPowder.headline.toLowerCase()}. It is packed and
+              Soil Soul makes {soilImprovementPowder.name} and {soilEnhancerGranules.name}, both
+              100% organic and natural soil enhancers. {soilImprovementPowder.name} is packed and
               marketed by {company.packedBy}.
             </p>
             <div className="hero-actions about-actions">
               <Link className="btn btn-primary" to="/products">
-                View the product
+                View the products
                 <Icon name="arrow" />
               </Link>
               <Link className="btn btn-secondary" to="/contact">
@@ -103,8 +103,8 @@ export default function AboutPage() {
       <section className="section">
         <div className="wrap">
           <div className="section-heading">
-            <h2>Product benefits</h2>
-            <p>Printed on the back of the pack.</p>
+            <h2>{soilImprovementPowder.name} benefits</h2>
+            <p>{soilImprovementPowder.benefitsNote}</p>
           </div>
           <BenefitList />
         </div>
@@ -120,9 +120,9 @@ export default function AboutPage() {
           </div>
           <ul className="contact-cards">
             <li>
-              <a href={company.whatsappHref}>
+              <a href={company.whatsappHref} target="_blank" rel="noreferrer">
                 <span className="icon-badge">
-                  <Icon name="chat" />
+                  <Icon name="whatsapp" />
                 </span>
                 <span className="way-copy">
                   <span>WhatsApp</span>
@@ -142,9 +142,9 @@ export default function AboutPage() {
               </a>
             </li>
             <li>
-              <a href={company.instagramHref}>
+              <a href={company.instagramHref} target="_blank" rel="noreferrer">
                 <span className="icon-badge">
-                  <Icon name="camera" />
+                  <Icon name="instagram" />
                 </span>
                 <span className="way-copy">
                   <span>Instagram</span>

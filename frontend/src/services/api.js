@@ -7,7 +7,16 @@
 
 import { readToken } from "./authStorage";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
+function apiBase() {
+  const raw = (import.meta.env.VITE_API_URL || "http://localhost:8000").trim().replace(/\/$/, "");
+  if (raw.startsWith("http://") || raw.startsWith("https://")) {
+    return raw;
+  }
+  // A host with no scheme is a relative path, so the browser loads index.html.
+  return `https://${raw}`;
+}
+
+const API_BASE = apiBase();
 
 function errorMessage(body) {
   if (!body) {

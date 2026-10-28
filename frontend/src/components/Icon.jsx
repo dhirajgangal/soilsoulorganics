@@ -1,106 +1,62 @@
-/** Small line icons used in the header and account pages. */
+/**
+ * Outline icons from react-icons/ai (Ant Design).
+ * Pages pass a short name, so an icon can be swapped here in one place.
+ * Ant Design has no plant icons, so the pack marks use the closest match.
+ */
+import {
+  AiOutlineAppstore,
+  AiOutlineApartment,
+  AiOutlineArrowRight,
+  AiOutlineCheck,
+  AiOutlineCheckCircle,
+  AiOutlineEnvironment,
+  AiOutlineExperiment,
+  AiOutlineGold,
+  AiOutlineHeart,
+  AiOutlineHome,
+  AiOutlineInbox,
+  AiOutlineInstagram,
+  AiOutlineLeft,
+  AiOutlineLogout,
+  AiOutlineMail,
+  AiOutlineMessage,
+  AiOutlinePhone,
+  AiOutlineRight,
+  AiOutlineRise,
+  AiOutlineShopping,
+  AiOutlineSun,
+  AiOutlineUser,
+  AiOutlineWhatsApp,
+} from "react-icons/ai";
 
-const SHAPES = {
-  user: (
-    <>
-      <circle cx="12" cy="8" r="3.2" />
-      <path d="M5.2 19.2c1.1-2.8 3.2-4.2 6.8-4.2s5.7 1.4 6.8 4.2" />
-    </>
-  ),
-  bag: (
-    <>
-      <path d="M6.5 8.5h11l-.8 10.2a1.5 1.5 0 0 1-1.5 1.3H8.8a1.5 1.5 0 0 1-1.5-1.3L6.5 8.5Z" />
-      <path d="M9 8.5V7.2A3 3 0 0 1 12 4a3 3 0 0 1 3 3.2v1.3" />
-    </>
-  ),
-  box: (
-    <>
-      <path d="M4 8.5 12 4.5l8 4v9L12 21.5 4 17.5v-9Z" />
-      <path d="M12 12.2 20 8.5M12 12.2v9.3M12 12.2 4 8.5" />
-    </>
-  ),
-  heart: (
-    <path d="M12 19.2s-6.2-3.8-6.2-8.1A3.4 3.4 0 0 1 12 8.6a3.4 3.4 0 0 1 6.2 2.5c0 4.3-6.2 8.1-6.2 8.1Z" />
-  ),
-  pin: (
-    <>
-      <path d="M12 20.5s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" />
-      <circle cx="12" cy="10.4" r="2.1" />
-    </>
-  ),
-  leaf: (
-    <>
-      <path d="M5 19c8-1 12-7 13-14-7 1-13 5-13 14Z" />
-      <path d="M9 14c2-2 4-3 7-4" />
-    </>
-  ),
-  logout: (
-    <>
-      <path d="M10 6H6.8A1.8 1.8 0 0 0 5 7.8v8.4A1.8 1.8 0 0 0 6.8 18H10" />
-      <path d="M13 15.5 16.5 12 13 8.5M9.5 12H16.2" />
-    </>
-  ),
-  chevronLeft: <path d="M14.5 6 8.5 12l6 6" />,
-  chevronRight: <path d="M9.5 6 15.5 12l-6 6" />,
-  arrow: <path d="M5 12h12M13 7l5 5-5 5" />,
-  roots: (
-    <>
-      <path d="M12 3.5v8" />
-      <path d="M12 11.5c-3.6 1.4-5.6 3.8-6.2 7" />
-      <path d="M12 11.5c3.6 1.4 5.6 3.8 6.2 7" />
-      <path d="M12 14c-1.8 1.8-2 3.8-1.8 6.2" />
-    </>
-  ),
-  sprout: (
-    <>
-      <path d="M12 21V11" />
-      <path d="M12 14.2C8.2 14.2 6 12 6 9.2 9.2 9.4 12 11.2 12 14.2Z" />
-      <path d="M12 12.4c3.4 0 5.6-1.8 5.6-4.4-3.2.4-5.6 2-5.6 4.4Z" />
-    </>
-  ),
-  layers: (
-    <>
-      <path d="M4 8.2 12 4.8l8 3.4L12 11.6 4 8.2Z" />
-      <path d="M4 12.2 12 15.6l8-3.4" />
-      <path d="M4 16.2 12 19.6l8-3.4" />
-    </>
-  ),
-  drop: <path d="M12 3.8s5.2 5.2 5.2 8.8a5.2 5.2 0 0 1-10.4 0C6.8 9 12 3.8 12 3.8Z" />,
-  sun: (
-    <>
-      <circle cx="12" cy="12" r="3.1" />
-      <path d="M12 4.2v1.8M12 18v1.8M4.2 12h1.8M18 12h1.8M6.5 6.5l1.3 1.3M16.2 16.2l1.3 1.3M17.5 6.5 16.2 7.8M7.8 16.2 6.5 17.5" />
-    </>
-  ),
-  wheat: (
-    <>
-      <path d="M12 21V8.5" />
-      <path d="M12 16.2c-2.2-.2-3.6-1.6-3.9-3.5 2 .2 3.4 1.4 3.9 3.5Z" />
-      <path d="M12 16.2c2.2-.2 3.6-1.6 3.9-3.5-2 .2-3.4 1.4-3.9 3.5Z" />
-      <path d="M12 12.4c-2-.2-3.2-1.5-3.5-3.2 1.8.2 3.1 1.3 3.5 3.2Z" />
-      <path d="M12 12.4c2-.2 3.2-1.5 3.5-3.2-1.8.2-3.1 1.3-3.5 3.2Z" />
-    </>
-  ),
-  check: <path d="M6 12.5 10 16.5 18 8" />,
-  chat: <path d="M5 16.2V7.8A1.8 1.8 0 0 1 6.8 6h10.4A1.8 1.8 0 0 1 19 7.8v6.2a1.8 1.8 0 0 1-1.8 1.8H9Z" />,
-  mail: (
-    <>
-      <path d="M4.5 7.2h15v10h-15Z" />
-      <path d="m5 8 7 5 7-5" />
-    </>
-  ),
-  camera: (
-    <>
-      <path d="M8 7.2h1.2L10 5.8h4l.8 1.4H16a2 2 0 0 1 2 2v6.6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9.2a2 2 0 0 1 2-2Z" />
-      <circle cx="12" cy="12.4" r="2.3" />
-    </>
-  ),
+const ICONS = {
+  user: AiOutlineUser,
+  bag: AiOutlineShopping,
+  box: AiOutlineInbox,
+  heart: AiOutlineHeart,
+  pin: AiOutlineEnvironment,
+  home: AiOutlineHome,
+  logout: AiOutlineLogout,
+  chevronLeft: AiOutlineLeft,
+  chevronRight: AiOutlineRight,
+  arrow: AiOutlineArrowRight,
+  check: AiOutlineCheck,
+  chat: AiOutlineMessage,
+  mail: AiOutlineMail,
+  phone: AiOutlinePhone,
+  whatsapp: AiOutlineWhatsApp,
+  instagram: AiOutlineInstagram,
+  // Pack marks
+  leaf: AiOutlineCheckCircle,
+  sprout: AiOutlineRise,
+  roots: AiOutlineApartment,
+  layers: AiOutlineGold,
+  drop: AiOutlineExperiment,
+  sun: AiOutlineSun,
+  wheat: AiOutlineAppstore,
 };
 
 export default function Icon({ name }) {
-  return (
-    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
-      {SHAPES[name]}
-    </svg>
-  );
+  const Glyph = ICONS[name] || AiOutlineCheck;
+  return <Glyph className="icon" aria-hidden="true" focusable="false" />;
 }

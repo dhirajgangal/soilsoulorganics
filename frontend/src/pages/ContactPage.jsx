@@ -9,7 +9,8 @@ const WAYS = [
     label: "WhatsApp",
     value: company.whatsapp,
     href: company.whatsappHref,
-    icon: "chat",
+    icon: "whatsapp",
+    external: true,
   },
   {
     label: "Email",
@@ -21,7 +22,8 @@ const WAYS = [
     label: "Instagram",
     value: company.instagram,
     href: company.instagramHref,
-    icon: "camera",
+    icon: "instagram",
+    external: true,
   },
 ];
 
@@ -42,7 +44,11 @@ export default function ContactPage() {
             <ul className="contact-cards">
               {WAYS.map((way) => (
                 <li key={way.label}>
-                  <a href={way.href}>
+                  <a
+                    href={way.href}
+                    target={way.external ? "_blank" : undefined}
+                    rel={way.external ? "noreferrer" : undefined}
+                  >
                     <span className="icon-badge">
                       <Icon name={way.icon} />
                     </span>

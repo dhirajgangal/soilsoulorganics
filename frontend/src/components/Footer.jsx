@@ -42,16 +42,16 @@ export default function Footer() {
 
           <div className="footer-col">
             <p className="footer-label">Reach us</p>
-            <a href={company.whatsappHref}>
-              <Icon name="chat" />
+            <a href={company.whatsappHref} target="_blank" rel="noreferrer">
+              <Icon name="whatsapp" />
               {company.whatsapp}
             </a>
             <a href={`mailto:${company.email}`}>
               <Icon name="mail" />
               {company.email}
             </a>
-            <a href={company.instagramHref}>
-              <Icon name="camera" />
+            <a href={company.instagramHref} target="_blank" rel="noreferrer">
+              <Icon name="instagram" />
               {company.instagram}
             </a>
           </div>
@@ -62,11 +62,20 @@ export default function Footer() {
         <p>
           Developed by {developer.name}
           <span aria-hidden="true"> · </span>
-          <a href={developer.phoneHref}>{developer.phone}</a>
+          <a href={developer.phoneHref}>
+            <Icon name="phone" />
+            {developer.phone}
+          </a>
           <span aria-hidden="true"> · </span>
-          <a href={`mailto:${developer.email}`}>{developer.email}</a>
+          <a href={`mailto:${developer.email}`}>
+            <Icon name="mail" />
+            {developer.email}
+          </a>
           <span aria-hidden="true"> · </span>
-          <a href={developer.whatsappHref}>WhatsApp</a>
+          <a href={developer.whatsappHref} target="_blank" rel="noreferrer">
+            <Icon name="whatsapp" />
+            WhatsApp
+          </a>
         </p>
       </div>
     </footer>

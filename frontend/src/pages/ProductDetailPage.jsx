@@ -7,7 +7,7 @@ import WishlistButton from "../components/WishlistButton";
 import ProductFacts from "../components/ProductFacts";
 import usePageTitle from "../hooks/usePageTitle";
 import { useCart } from "../context/CartContext";
-import { soilImprovementPowder } from "../content/pack";
+import { findPackContent } from "../content/pack";
 import { getProduct } from "../services/api";
 import { formatPrice, hasSellingPrice } from "../services/money";
 
@@ -81,7 +81,7 @@ export default function ProductDetailPage() {
   }
 
   const priced = hasSellingPrice(product.price);
-  const isPowder = product.name === soilImprovementPowder.name;
+  const packContent = findPackContent(product.name);
 
   return (
     <section className="section">
@@ -128,9 +128,9 @@ export default function ProductDetailPage() {
           )}
         </div>
       </div>
-      {isPowder ? (
+      {packContent ? (
         <div className="wrap product-facts-wrap">
-          <ProductFacts />
+          <ProductFacts content={packContent} />
         </div>
       ) : null}
     </section>

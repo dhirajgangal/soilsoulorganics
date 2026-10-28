@@ -1,128 +1,174 @@
-/* Home page: slider, highlight cards, product feature, and benefit grid. */
+/* Home page: hero, highlight cards, product list, and benefit list. */
 
-.slider {
-  background:
-    radial-gradient(circle at 12% 20%, rgba(64, 96, 64, 0.08), transparent 28%),
-    var(--cream);
-  padding: 28px 0 36px;
-}
+/* Hero */
 
-.slider-frame {
+.hero {
   position: relative;
-}
-
-.slide {
-  display: none;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 36px;
-  align-items: center;
-  min-height: 460px;
-}
-
-.slide.is-active {
-  display: grid;
-}
-
-.slide-copy h1,
-.slide-copy h2 {
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
-  margin-bottom: 12px;
-}
-
-.slide-copy {
-  padding-bottom: 64px;
-}
-
-.slide-copy p {
-  max-width: 34rem;
-  color: var(--muted);
-}
-
-.slide-visual {
-  border-radius: 28px;
+  min-height: clamp(560px, 82vh, 740px);
   overflow: hidden;
-  background: var(--sand);
-  box-shadow: var(--shadow);
-  height: 460px;
 }
 
-.slide-visual img {
-  display: block;
+.hero-photos {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(64%, 920px);
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  mask-image: linear-gradient(to right, transparent, var(--ink) 30%);
+}
+
+.hero-photo.is-active {
+  opacity: 1;
+}
+
+.hero-photo.is-blend {
+  mix-blend-mode: multiply;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: inherit;
+  padding: 48px 0;
+}
+
+.hero-copy {
+  max-width: 30rem;
+}
+
+.hero-title {
+  margin: 0 0 36px;
+  color: var(--green-deep);
+}
+
+.hero-caps {
+  display: block;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.9vw, 1.45rem);
+  font-weight: 300;
+  letter-spacing: 0.42em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.hero-script {
+  display: block;
+  margin: -0.02em 0 0 -0.08em;
+  font-family: var(--font-script);
+  font-size: clamp(3.6rem, 8vw, 6.6rem);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-slide {
+  display: none;
+}
+
+.hero-slide.is-active {
+  display: block;
+  animation: hero-fade 0.9s ease;
+}
+
+.hero-slide h2 {
+  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+  margin-bottom: 8px;
+}
+
+.hero-slide p:last-child {
+  max-width: 26rem;
+  color: var(--muted);
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .slider-controls {
-  position: absolute;
-  left: 0;
-  bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.slider-controls > button,
-.slider-dots button {
-  border: 1px solid var(--line);
-  background: var(--white);
-  color: var(--green-deep);
-  cursor: pointer;
+  gap: 14px;
+  margin-top: 36px;
 }
 
 .slider-controls > button {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.slider-controls > button:hover {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+  color: var(--on-dark);
+}
+
+.slider-controls .icon {
+  width: 18px;
+  height: 18px;
 }
 
 .slider-dots {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
+/* The visible line is 2px; the padding keeps a comfortable tap target. */
 .slider-dots button {
-  width: 11px;
-  height: 11px;
+  width: 28px;
+  height: 18px;
   padding: 0;
-  border-radius: 999px;
-  background: #d7d0c6;
+  border: 0;
+  background: linear-gradient(var(--line), var(--line)) center / 100% 2px no-repeat;
+  cursor: pointer;
 }
 
 .slider-dots button.is-active {
-  width: 28px;
-  background: var(--green);
-  border-color: var(--green);
+  width: 44px;
+  background-image: linear-gradient(var(--ink), var(--ink));
 }
 
+/* Pack highlights */
+
 .home-highlights {
-  padding-top: 20px;
+  padding-top: 32px;
 }
 
 .highlight-grid,
 .benefit-grid {
   display: grid;
-  gap: 16px;
+  gap: 28px;
 }
 
 .highlight-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.highlight-card,
-.benefit-grid li {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-}
-
-.highlight-card {
-  padding: 12px 12px 8px;
-  overflow: hidden;
 }
 
 .highlight-photo {
@@ -130,72 +176,49 @@
 }
 
 .highlight-card img {
+  display: block;
   width: 100%;
-  height: 150px;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 }
 
 .highlight-photo .icon-badge {
   position: absolute;
-  left: 10px;
-  bottom: 10px;
-  background: var(--white);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
+  left: 12px;
+  bottom: 12px;
 }
 
 .highlight-card h3 {
-  margin: 12px 0 6px;
-  font-size: 1.2rem;
+  margin: 18px 0 6px;
 }
 
-.highlight-card p,
-.benefit-grid li {
+.highlight-card p {
   color: var(--muted);
 }
 
+/* Product list */
+
 .home-feature-section {
-  padding-top: 8px;
+  padding-top: 0;
 }
 
-.feature {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  gap: 0;
-  align-items: stretch;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-.feature img {
-  width: 100%;
-  height: 100%;
-  min-height: 420px;
-  object-fit: contain;
-  object-position: center;
-  background: var(--sand);
-}
-
-.feature-copy {
-  padding: 36px 32px;
-}
+/* Benefits, used on the home, about, and product pages */
 
 .benefit-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  list-style: none;
+  gap: 0 40px;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .benefit-grid li {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 16px;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
   color: var(--ink);
 }
 
@@ -210,98 +233,139 @@
   height: 16px;
 }
 
+/* Growth band */
+
 .home-growth-section {
-  padding-top: 8px;
-  padding-bottom: 12px;
+  padding-top: 0;
+  padding-bottom: 24px;
 }
 
 .growth-band {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.7fr);
-  gap: 28px;
+  gap: 40px;
   align-items: center;
-  padding: 20px 28px 20px 20px;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  box-shadow: var(--shadow);
+  padding: 40px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
 }
 
 .growth-band img {
   width: 100%;
   height: 260px;
   object-fit: contain;
-  background: var(--white);
+  mix-blend-mode: multiply;
 }
 
+.growth-band p:last-child {
+  color: var(--muted);
+}
+
+/* Crops band */
+
 .home-band-section {
-  padding-top: 8px;
+  padding-top: 24px;
 }
 
 .crop-band {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
-  gap: 32px;
-  padding: 40px;
-  border-radius: 28px;
+  gap: 48px;
+  padding: 56px;
+  border-radius: var(--radius-lg);
   background: var(--green-deep);
-  color: #f6f3ee;
+  color: var(--on-dark);
 }
 
 .crop-band h2,
 .crop-band p {
-  color: #f6f3ee;
+  color: var(--on-dark);
 }
 
 .crop-band .eyebrow {
-  color: #d7c4a4;
+  color: var(--on-dark-accent);
 }
 
 .crop-band .btn-secondary {
   margin-top: 8px;
-  border-color: #efe6d9;
-  color: #f6f3ee;
-  background: transparent;
+  border-color: var(--on-dark);
+  color: var(--on-dark);
 }
 
 .crop-band .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--on-dark);
+  color: var(--green-deep);
+}
+
+@media (max-width: 960px) {
+  .highlight-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .benefit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 800px) {
-  .slide,
-  .slide.is-active,
-  .highlight-grid,
-  .feature,
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .hero-inner {
+    order: 1;
+    min-height: 0;
+    padding: 36px 0 24px;
+  }
+
+  .hero-photos {
+    position: relative;
+    order: 2;
+    width: 100%;
+    height: 300px;
+  }
+
+  .hero-photo {
+    mask-image: none;
+  }
+
+  .hero-title {
+    margin-bottom: 24px;
+  }
+
+  .hero-caps {
+    letter-spacing: 0.32em;
+  }
+
+  .hero-script {
+    font-size: clamp(2.8rem, 13vw, 3.6rem);
+    white-space: normal;
+  }
+
+  .slider-controls {
+    margin-top: 24px;
+  }
+
   .benefit-grid,
   .crop-band,
   .growth-band {
     grid-template-columns: 1fr;
   }
 
-  .slide-visual,
-  .feature img {
-    min-height: 240px;
-    height: 280px;
-  }
-
-  .slider-controls {
-    position: static;
-    margin-top: 16px;
-  }
-
-  .slide-copy {
-    padding-bottom: 0;
-  }
-
-  .feature-copy,
   .crop-band {
-    padding: 24px;
+    gap: 28px;
+    padding: 32px 24px;
   }
 }
 
 @media (max-width: 560px) {
   .highlight-grid {
     grid-template-columns: 1fr;
+  }
+
+  .highlight-card img {
+    aspect-ratio: 4 / 3;
   }
 }

@@ -1,11 +1,12 @@
-"""Inserts Soil Improvement Powder and removes the old placeholder products.
+"""Inserts the Soil Soul products and removes the old placeholder products.
 
 Run this from the backend folder:
 
     python -m app.db.seed
 
-The pack artwork does not list an M.R.P. The price stays 0.00 until you
-set SELLING_PRICE below and run this file again.
+The pack artwork does not list an M.R.P. Prices stay 0.00 until you set
+them in PRODUCTS below and run this file again. Product names must match
+the names in frontend/src/content/pack.js.
 """
 
 from decimal import Decimal
@@ -14,18 +15,23 @@ from app.db.session import SessionLocal
 from app.models.order import OrderItem
 from app.models.product import Product
 
-# The printed pack leaves M.R.P. blank. Change this when the selling price is known.
-SELLING_PRICE = Decimal("0.00")
-
-PRODUCT = {
-    "name": "Soil Improvement Powder",
-    "description": (
-        "100% organic and natural soil enhancer, suitable for all types of crops. "
-        "Apply it to the soil and incorporate it uniformly during land preparation, "
-        "or as recommended by an agricultural expert."
-    ),
-    "price": SELLING_PRICE,
-}
+# The printed packs leave M.R.P. blank. Change a price when it is known.
+PRODUCTS = [
+    {
+        "name": "Soil Improvement Powder",
+        "description": (
+            "100% organic and natural soil enhancer, suitable for all types of crops. "
+            "Apply it to the soil and incorporate it uniformly during land preparation, "
+            "or as recommended by an agricultural expert."
+        ),
+        "price": Decimal("0.00"),
+    },
+    {
+        "name": "Soil Enhancer Granules",
+        "description": "100% organic and natural soil enhancer granules, for all types of crops.",
+        "price": Decimal("0.00"),
+    },
+]
 
 OLD_PLACEHOLDERS = ("Garden Soil Blend", "Compost Blend")
 
@@ -41,15 +47,16 @@ def seed() -> None:
             db.delete(product)
             removed += 1
 
-        existing = db.query(Product).filter(Product.name == PRODUCT["name"]).first()
-        if existing is None:
-            db.add(Product(**PRODUCT))
-            print("Added Soil Improvement Powder.")
-        else:
-            existing.description = PRODUCT["description"]
-            if Decimal(existing.price) == 0 and PRODUCT["price"] != 0:
-                existing.price = PRODUCT["price"]
-            print("Updated Soil Improvement Powder.")
+        for item in PRODUCTS:
+            existing = db.query(Product).filter(Product.name == item["name"]).first()
+            if existing is None:
+                db.add(Product(**item))
+                print(f"Added {item['name']}.")
+                continue
+            existing.description = item["description"]
+            if Decimal(existing.price) == 0 and item["price"] != 0:
+                existing.price = item["price"]
+            print(f"Updated {item['name']}.")
 
         db.commit()
         if removed:

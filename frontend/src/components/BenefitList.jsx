@@ -1,16 +1,14 @@
-/** Benefit lines from the pack, each with a small icon. */
+/** Benefit lines from a pack, each with a small icon. */
 import { soilImprovementPowder } from "../content/pack";
 import Icon from "./Icon";
 
-const ICONS = ["drop", "layers", "leaf", "sun", "sprout", "roots", "wheat", "check", "wheat"];
-
-export default function BenefitList() {
+export default function BenefitList({ content = soilImprovementPowder }) {
   return (
     <ul className="benefit-grid">
-      {soilImprovementPowder.benefits.map((benefit, index) => (
+      {content.benefits.map((benefit, index) => (
         <li key={benefit}>
           <span className="icon-badge">
-            <Icon name={ICONS[index]} />
+            <Icon name={content.benefitIcons[index] || "check"} />
           </span>
           <span>{benefit}</span>
         </li>

@@ -4,7 +4,7 @@ import Icon from "../../components/Icon";
 import { useAuth } from "../../context/AuthContext";
 
 const LINKS = [
-  { to: "/account", label: "My account", icon: "leaf", end: true },
+  { to: "/account", label: "My account", icon: "home", end: true },
   { to: "/account/orders", label: "My orders", icon: "box" },
   { to: "/account/wishlist", label: "Wishlist", icon: "heart" },
   { to: "/account/addresses", label: "Addresses", icon: "pin" },
