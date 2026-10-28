@@ -2,16 +2,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "../../components/Icon";
+import OrderTracker from "../../components/OrderTracker";
 import usePageTitle from "../../hooks/usePageTitle";
 import { getMyOrders } from "../../services/api";
 import { formatPrice } from "../../services/money";
-
-function formatWhen(value) {
-  return new Date(value).toLocaleString("en-IN", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-}
+import { formatWhen, paymentLabel, statusLabel } from "../../services/orderStatus";
 
 export default function AccountOrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -51,7 +46,7 @@ export default function AccountOrdersPage() {
         </span>
         <div>
           <h1>My orders</h1>
-          <p className="muted">Orders you place while logged in. Payment stays pending until it is collected.</p>
+          <p className="muted">Orders you place while logged in, with their delivery progress.</p>
         </div>
       </div>
       {loading ? <p className="status-text">Loading orders…</p> : null}
@@ -78,9 +73,10 @@ export default function AccountOrdersPage() {
                 </span>
                 Order {order.id}
               </h2>
-              <span className="status-pill">Pending payment</span>
+              <span className="status-pill">{statusLabel(order.status)}</span>
             </div>
-            <p className="muted">{formatWhen(order.created_at)}</p>
+            <p className="muted">Placed {formatWhen(order.created_at)}</p>
+            <OrderTracker order={order} />
             <ul>
               {order.items.map((item) => (
                 <li key={`${order.id}-${item.product_id}`}>
@@ -91,6 +87,7 @@ export default function AccountOrdersPage() {
             <p>
               Deliver to {order.address_line}, {order.city}, {order.state} {order.postal_code}
             </p>
+            <p className="muted">{paymentLabel(order)}</p>
             <p className="price">{formatPrice(order.total)}</p>
           </article>
         ))}

@@ -24,12 +24,12 @@ PRODUCTS = [
             "Apply it to the soil and incorporate it uniformly during land preparation, "
             "or as recommended by an agricultural expert."
         ),
-        "price": Decimal("0.00"),
+        "price": Decimal("50.00"),
     },
     {
         "name": "Soil Enhancer Granules",
         "description": "100% organic and natural soil enhancer granules, for all types of crops.",
-        "price": Decimal("0.00"),
+        "price": Decimal("60.00"),
     },
 ]
 
@@ -54,7 +54,8 @@ def seed() -> None:
                 print(f"Added {item['name']}.")
                 continue
             existing.description = item["description"]
-            if Decimal(existing.price) == 0 and item["price"] != 0:
+            # 0.00 here means "price not known", so it never wipes a real price.
+            if item["price"] != 0:
                 existing.price = item["price"]
             print(f"Updated {item['name']}.")
 

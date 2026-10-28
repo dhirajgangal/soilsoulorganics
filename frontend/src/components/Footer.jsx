@@ -10,6 +10,7 @@ const EXPLORE = [
   { to: "/products", label: "Products" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
+  { to: "/track-order", label: "Track order" },
 ];
 
 export default function Footer() {

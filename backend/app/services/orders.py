@@ -6,7 +6,7 @@ the products table so the customer cannot choose their own price.
 
 from decimal import Decimal
 
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.models.order import Order, OrderItem
 from app.models.product import Product
@@ -46,7 +46,9 @@ def create_order(db: Session, data: OrderCreate, user: User | None = None) -> Or
         state=data.state,
         postal_code=data.postal_code,
         notes=data.notes,
-        status="pending_payment",
+        status="placed",
+        payment_method=data.payment_method,
+        payment_status="pending",
         subtotal=Decimal("0.00"),
         total=Decimal("0.00"),
     )
@@ -76,4 +78,12 @@ def create_order(db: Session, data: OrderCreate, user: User | None = None) -> Or
     db.add(order)
     db.commit()
     db.refresh(order)
+    return order
+
+
+def find_order_for_tracking(db: Session, order_id: int, email: str) -> Order | None:
+    """Return the order only when the email matches the one used at checkout."""
+    order = db.query(Order).options(joinedload(Order.items)).filter(Order.id == order_id).first()
+    if order is None or order.email.strip().lower() != email.strip().lower():
+        return None
     return order

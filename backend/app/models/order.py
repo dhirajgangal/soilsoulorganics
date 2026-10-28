@@ -11,6 +11,15 @@ from sqlalchemy.sql import func
 
 from app.db.base import Base
 
+# Delivery progress, in the order a parcel moves through them.
+# "cancelled" can replace any step before "delivered".
+ORDER_STEPS = ("placed", "confirmed", "shipped", "out_for_delivery", "delivered")
+ORDER_STATUSES = ORDER_STEPS + ("cancelled",)
+
+# Cash on delivery is the only method until a payment gateway is added.
+PAYMENT_METHODS = ("cod",)
+PAYMENT_STATUSES = ("pending", "paid")
+
 
 class Order(Base):
     __tablename__ = "orders"
@@ -26,12 +35,21 @@ class Order(Base):
     state = Column(String(80), nullable=False)
     postal_code = Column(String(20), nullable=False)
     notes = Column(Text, nullable=True)
-    # pending_payment means the order is saved and no payment is confirmed.
-    # Do not set this to "paid" unless a payment provider confirms the money.
-    status = Column(String(40), nullable=False, default="pending_payment")
+    # One of ORDER_STATUSES. Checkout always starts at "placed".
+    status = Column(String(40), nullable=False, default="placed")
+    payment_method = Column(String(20), nullable=False, default="cod", server_default="cod")
+    # Checkout never sets "paid". For cash on delivery, the shop marks it
+    # paid only after the cash is collected (python -m app.db.order_status).
+    payment_status = Column(String(20), nullable=False, default="pending", server_default="pending")
     subtotal = Column(Numeric(10, 2), nullable=False)
     total = Column(Numeric(10, 2), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=False,
+    )
 
     items = relationship(
         "OrderItem",

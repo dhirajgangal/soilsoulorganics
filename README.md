@@ -2,7 +2,7 @@
 
 A small online shop for Soil Soul. The React website shows the products, and the FastAPI server saves orders in PostgreSQL.
 
-The shop currently lists Soil Improvement Powder. The name, price, and short description live in `backend/app/db/seed.py`. The pack artwork leaves M.R.P. blank, so the selling price stays `0.00` until you set `SELLING_PRICE` in that file and run the seed command again.
+The shop lists Soil Improvement Powder and Soil Enhancer Granules. Their names, prices, and short descriptions live in the `PRODUCTS` list in `backend/app/db/seed.py`. The pack artwork leaves M.R.P. blank, so each price stays `0.00` and Add to cart stays hidden until you set the price in that list and run `python -m app.db.seed` again.
 
 ## How a page load works
 

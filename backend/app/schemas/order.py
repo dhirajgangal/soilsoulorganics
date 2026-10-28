@@ -2,10 +2,12 @@
 
 OrderCreate is what the browser is allowed to send.
 It has no price and no payment status. The server fills those in.
+OrderTrackRead is the smaller shape returned to the public track page.
 """
 
 from datetime import datetime
 from decimal import Decimal
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_serializer, field_validator
 
@@ -24,6 +26,7 @@ class OrderCreate(BaseModel):
     state: str
     postal_code: str
     notes: str | None = None
+    payment_method: Literal["cod"] = "cod"
     items: list[OrderItemCreate] = Field(min_length=1)
 
     @field_validator("customer_name")
@@ -102,13 +105,45 @@ class OrderRead(BaseModel):
     postal_code: str
     notes: str | None
     status: str
+    payment_method: str
+    payment_status: str
     subtotal: Decimal
     total: Decimal
     created_at: datetime
+    updated_at: datetime
     items: list[OrderItemRead]
 
     model_config = ConfigDict(from_attributes=True)
 
     @field_serializer("subtotal", "total")
+    def serialize_money(self, value: Decimal) -> str:
+        return f"{Decimal(value):.2f}"
+
+
+class OrderTrackRequest(BaseModel):
+    order_id: int = Field(gt=0)
+    email: EmailStr
+
+
+class OrderTrackRead(BaseModel):
+    """What anyone with the order number and email can see.
+
+    It leaves out the street address, phone, and email.
+    """
+
+    id: int
+    status: str
+    payment_method: str
+    payment_status: str
+    total: Decimal
+    city: str
+    state: str
+    created_at: datetime
+    updated_at: datetime
+    items: list[OrderItemRead]
+
+    model_config = ConfigDict(from_attributes=True)
+
+    @field_serializer("total")
     def serialize_money(self, value: Decimal) -> str:
         return f"{Decimal(value):.2f}"

@@ -1,6 +1,7 @@
 /**
  * Checkout collects delivery details and sends the cart to POST /api/orders.
- * Only product ids and quantities are sent. The API calculates the price.
+ * Only product ids, quantities, and the payment method are sent.
+ * The API calculates the price. Cash on delivery is the only method for now.
  */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -132,6 +133,7 @@ export default function CheckoutPage() {
         state: form.state,
         postal_code: form.postal_code,
         notes: form.notes,
+        payment_method: "cod",
         items: items.map((item) => ({
           product_id: item.productId,
           quantity: item.quantity,
@@ -166,7 +168,7 @@ export default function CheckoutPage() {
       <div className="wrap">
         <div className="section-heading">
           <h1>Checkout</h1>
-          <p>This is a development checkout. No payment is taken.</p>
+          <p>Enter your delivery details. You pay in cash when the order arrives.</p>
         </div>
         <div className="checkout-layout">
           <form className="checkout-form" onSubmit={handleSubmit} noValidate>
@@ -285,6 +287,17 @@ export default function CheckoutPage() {
                 aria-invalid={Boolean(errors.notes)}
               />
             </Field>
+            <fieldset className="payment-options">
+              <legend>Payment</legend>
+              <label className="payment-option" htmlFor="payment_cod">
+                <input id="payment_cod" type="radio" name="payment_method" value="cod" checked readOnly />
+                <span>
+                  <strong>Cash on delivery</strong>
+                  <span className="muted">Pay the courier in cash when your order arrives.</span>
+                </span>
+              </label>
+              <p className="muted">Online payment is coming soon.</p>
+            </fieldset>
             <Button type="submit" disabled={submitting}>
               {submitting ? "Placing order…" : "Place order"}
             </Button>
@@ -309,8 +322,12 @@ export default function CheckoutPage() {
               <span>Total</span>
               <strong>{formatPaise(subtotalPaise)}</strong>
             </div>
+            <div className="summary-row">
+              <span>Payment</span>
+              <span>Cash on delivery</span>
+            </div>
             <p className="muted">
-              The order is saved as pending payment. Nothing is marked paid.
+              You pay this amount in cash on delivery. Nothing is charged now.
             </p>
           </aside>
         </div>

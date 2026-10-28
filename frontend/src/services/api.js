@@ -81,6 +81,13 @@ export function createOrder(order) {
   });
 }
 
+export function trackOrder(orderId, email) {
+  return request("/api/orders/track", {
+    method: "POST",
+    body: JSON.stringify({ order_id: Number(orderId), email }),
+  });
+}
+
 export function registerAccount(body) {
   return request("/api/auth/register", { method: "POST", body: JSON.stringify(body) });
 }
